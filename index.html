@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <meta http-equiv="x-ua-compatible" content="ie=edge" />
+  <title>PaginaQR-Univalle</title>
+  <!-- MDB icon -->
+  <link rel="icon" href="img/mdb-favicon.ico" type="image/x-icon" />
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css" />
+  <link rel="stylesheet" href="css/index.css" />
+  <!-- Google Fonts Roboto -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" />
+  <!-- MDB -->
+  <link rel="stylesheet" href="css/mdb.min.css" />
+  <script type="text/javascript" src="js/jquery.min.js"></script>
+  <script type="text/javascript" src="js/qrcode.js"></script>
+  <script type="text/javascript" src="js/creacionQRlavamanos.js"></script>
+</head>
+
+<body>
+  <div class="card cardGlobal">
+    <div class="card-title"><img src="img/bannerGeneral.jpg" style="width: 100%; height: 150px;"></div>
+    <div class="card cardSecundaria">
+      <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
+        <div id="qrResult">
+        </div>
+        <a href="#!">
+          <div class="mask" style="background-color: rgba(251, 251, 251, 0.15)"></div>
+        </a>
+      </div>
+      <div class="card-body">
+        <h5 class="card-title">Codigo QR - Ingreso</h5>
+      </div>
+    </div>
+  </div>
+  <div id="codigoQR"></div>
+</body>
+<script type="text/javascript">
+  $(document).ready(function () {
+    generarCodigo();
+  });
+  var qrcode = new QRCode(document.getElementById('qrResult'), {
+    width: 300,
+    height: 300
+  });
+
+  function generarCodigo() {
+    var codInstitucion = '1';
+
+    var fechaactual = new Date();
+    var dia = fechaactual.getDate();
+    var mes = fechaactual.getMonth();
+    var ahno = fechaactual.getFullYear();
+    var mesConcatenado = "";
+
+    mes = mes + 1;
+    mesConcatenado = "0" + mes;
+    fechaDia = dia + "/" + mesConcatenado + "/" + ahno;
+
+    //alert(fechaDia);
+
+    let cadena = "";
+    cadena += '[{"codInstitucion"' + ":" + '"' + codInstitucion + '"' + ',' + '"fecha"' + ":" + '"' + fechaDia + '"' + '}]';
+    qrcode.makeCode(cadena);
+  }
+</script>
+
+<!-- MDB -->
+<script type="text/javascript" src="js/mdb.min.js"></script>
+<!-- Custom scripts -->
+<script type="text/javascript"></script>
+
+</html>
